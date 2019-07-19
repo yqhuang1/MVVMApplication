@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MVVMApplication</string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string name="myInfoActivityChick">跳转MyInfoActivity</string>
+    <string name="myShowActivityChick">转入MyShowActivity</string>
+    <string name="toolBarTitle">Show Time</string>
+</resources>

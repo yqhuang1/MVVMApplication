@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.mvvmapplication.MainActivity">
+    <!--绑定布局时，只需要layout的xmlns:android 、xmlns:app 、xmlns:img（绑定图片下）的属性即可-->
+    <!--其他属性必须去除-->
+
+    <data>
+
+        <variable
+            name="mainViewModel"
+            type="com.example.mvvmapplication.MainViewModel" />
+    </data>
+
+    <!--Activity真正的布局-->
+    <!--而且 layout 中必须加载一个真正的布局，比如 LinearLayout 等等-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="50dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:onClick="@{mainViewModel::onMyInfoBtnClick}"
+            android:text="@string/myInfoActivityChick" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:onClick="@{mainViewModel::onMyShowBtnClick}"
+            android:text="@string/myShowActivityChick" />
+
+    </LinearLayout>
+
+
+</layout>
