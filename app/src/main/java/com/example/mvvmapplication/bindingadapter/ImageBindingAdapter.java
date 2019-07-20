@@ -10,6 +10,7 @@ import com.example.mvvmapplication.utils.GlideCircleTransform;
 
 /**
  * 类说明
+ * 图片绑定显示
  *
  * @author renjialiang
  * @version [版本]
@@ -18,6 +19,14 @@ import com.example.mvvmapplication.utils.GlideCircleTransform;
  */
 public class ImageBindingAdapter {
 
+    /**
+     * 网络下载式
+     *  img:error="@{@drawable/avatar1}"
+     *  img:imgUrl="@{myInfoViewModel.imageUrl}"
+     *  img:placeholder="@{@color/color_place_holder}"
+     *
+     *     @BindingAdapter({"img:imgUrl", "img:placeholder", "img:error"})
+     **/
     @BindingAdapter({"imgUrl", "placeholder", "error"})
     public static void loadImage(ImageView imageView, String url, Drawable holderDrawable,
                                  Drawable errorDrawable) {
@@ -33,6 +42,12 @@ public class ImageBindingAdapter {
                 .into(imageView);
     }
 
+    /**
+     * 本地加载式
+     *  img:src="@{meViewModel.mHeadImgResId}
+     *
+     *     @BindingAdapter("img:src")
+     **/
     @BindingAdapter("src")
     public static void setSrc(ImageView imageView, int resId) {
         imageView.setImageResource(resId);

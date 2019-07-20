@@ -4,8 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     tools:context="com.example.mvvmapplication.MainActivity">
+    <!--绑定布局时，必须以layout起-->
     <!--绑定布局时，只需要layout的xmlns:android 、xmlns:app 、xmlns:img（绑定图片下）的属性即可-->
     <!--其他属性必须去除-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        一个布局中只能出现一次-->
 
     <data>
 
@@ -36,6 +40,13 @@
             android:layout_margin="20dp"
             android:onClick="@{mainViewModel::onMyShowBtnClick}"
             android:text="@string/myShowActivityChick" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:onClick="@{mainViewModel::onMyListBtnClick}"
+            android:text="@string/myListActivityChick" />
 
     </LinearLayout>
 

@@ -3,5 +3,7 @@
     <string name="title_activity_info">InfoActivity</string>
     <string name="myInfoActivityChick">跳转MyInfoActivity</string>
     <string name="myShowActivityChick">转入MyShowActivity</string>
+    <string name="myListActivityChick">抵达MyListActivity</string>
     <string name="toolBarTitle">Show Time</string>
+    <string name="title_activity_my_list">MyListActivity</string>
 </resources>

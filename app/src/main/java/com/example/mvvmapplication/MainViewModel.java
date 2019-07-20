@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.example.mvvmapplication.base.BaseViewModel;
 import com.example.mvvmapplication.myinfo.MyInfoActivity;
+import com.example.mvvmapplication.mylist.MyListActivity;
 import com.example.mvvmapplication.myshow.MyShowActivity;
 
 public class MainViewModel extends BaseViewModel<MainActivity> {
@@ -24,6 +25,10 @@ public class MainViewModel extends BaseViewModel<MainActivity> {
 
     public void onMyShowBtnClick(View view) {
         mActivity.startActivity(new Intent(mActivity, MyShowActivity.class));
+    }
+
+    public void onMyListBtnClick(View view) {
+        mActivity.startActivity(new Intent(mActivity, MyListActivity.class));
     }
 
     @Override

@@ -1,11 +1,10 @@
 package com.example.mvvmapplication.myshow;
 
-import com.example.mvvmapplication.base.BaseActivity;
 import com.example.mvvmapplication.base.BaseViewModel;
 
-public class MyShowViewModel extends BaseViewModel {
+public class MyShowViewModel extends BaseViewModel<MyShowActivity> {
 
-    public MyShowViewModel(BaseActivity activity) {
+    public MyShowViewModel(MyShowActivity activity) {
         super(activity);
     }
 
