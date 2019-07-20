@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:img="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="myListViewModel"
+            type="com.example.mvvmapplication.mylist.MyListViewModel" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mylist.MyListActivity">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="MyListActivity"
+                app:titleTextColor="@color/color_white" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <!--
+        绑定数据     （variable）name.（ViewModel public）（集合数据List）属性名
+        -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            app:data="@{myListViewModel.myListViewModel}" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>
