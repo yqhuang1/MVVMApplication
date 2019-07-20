@@ -30,13 +30,16 @@ public class MyListActivity extends BaseActivity {
         myListViewModel = new MyListViewModel(this);
         myListBinding.setMyListViewModel(myListViewModel);
 
-//        根据layout中的组件ID取
+//        根据layout中的组件ID取组件
         myListBinding.myListRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         myListBinding.myListRecyclerView.addItemDecoration(new VerticalDecoration(this));
 
 
         meCommonAdapter = new CommonAdapter<>(R.layout.list_item_me, BR.meViewModel);
+        myListBinding.myListRecyclerView.setAdapter(meCommonAdapter);
+
+        myListViewModel.loadMeList();
 
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);

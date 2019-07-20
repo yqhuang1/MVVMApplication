@@ -31,7 +31,7 @@ public class MeViewModel extends BaseViewModel<MyListActivity> {
 
 
     public void onMeClick(View view) {
-        Toast.makeText(mActivity, mLastMessage.get(), Toast.LENGTH_LONG).show();
+        Toast.makeText(mActivity, mNickName.get() + "  Say:  " + mLastMessage.get(), Toast.LENGTH_SHORT).show();
     }
 
 }

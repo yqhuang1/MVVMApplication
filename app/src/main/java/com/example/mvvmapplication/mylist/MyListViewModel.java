@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyListViewModel extends BaseViewModel<MyListActivity> {
-    
+
     public ObservableField<List<MeViewModel>> myListViewModel = new ObservableField<>();
 
     public MyListViewModel(MyListActivity activity) {
         super(activity);
     }
 
-    public void loadFriendList() {
+    public void loadMeList() {
         List<MeViewModel> friends = new ArrayList<>();
         friends.addAll(requestData());
         myListViewModel.set(friends);
@@ -38,7 +38,7 @@ public class MyListViewModel extends BaseViewModel<MyListActivity> {
         data.add(new MeViewModel(mActivity).setData(R.drawable.head_image_12, "小六", "哑巴回家滴滴答答吹喇叭"));
         return data;
     }
-    
+
     @Override
     public void clear() {
 
