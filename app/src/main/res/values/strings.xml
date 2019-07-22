@@ -4,6 +4,10 @@
     <string name="myInfoActivityChick">跳转MyInfoActivity</string>
     <string name="myShowActivityChick">转入MyShowActivity</string>
     <string name="myListActivityChick">抵达MyListActivity</string>
+    <string name="myChatActivityChick">抵达MyChatActivity</string>
     <string name="toolBarTitle">Show Time</string>
     <string name="title_activity_my_list">MyListActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

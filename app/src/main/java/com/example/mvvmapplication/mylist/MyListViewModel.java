@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MyListViewModel extends BaseViewModel<MyListActivity> {
 
-    public ObservableField<List<MeViewModel>> myListViewModel = new ObservableField<>();
+    public ObservableField<List<MeViewModel>> mListViewModel = new ObservableField<>();
 
     public MyListViewModel(MyListActivity activity) {
         super(activity);
@@ -19,7 +19,7 @@ public class MyListViewModel extends BaseViewModel<MyListActivity> {
     public void loadMeList() {
         List<MeViewModel> friends = new ArrayList<>();
         friends.addAll(requestData());
-        myListViewModel.set(friends);
+        mListViewModel.set(friends);
     }
 
     private List<MeViewModel> requestData() {

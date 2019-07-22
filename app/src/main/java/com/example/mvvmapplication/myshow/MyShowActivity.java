@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.example.mvvmapplication.R;
 import com.example.mvvmapplication.base.BaseActivity;
 import com.example.mvvmapplication.databinding.ActivityMyShowBinding;
-import com.example.mvvmapplication.fragment.ListFragment;
+import com.example.mvvmapplication.base.ListFragment;
 
 import java.util.ArrayList;
 import java.util.List;

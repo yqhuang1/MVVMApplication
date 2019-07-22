@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.example.mvvmapplication.base.BaseViewModel;
+import com.example.mvvmapplication.mychat.MyChatActivity;
 import com.example.mvvmapplication.myinfo.MyInfoActivity;
 import com.example.mvvmapplication.mylist.MyListActivity;
 import com.example.mvvmapplication.myshow.MyShowActivity;
@@ -29,6 +30,10 @@ public class MainViewModel extends BaseViewModel<MainActivity> {
 
     public void onMyListBtnClick(View view) {
         mActivity.startActivity(new Intent(mActivity, MyListActivity.class));
+    }
+
+    public void onMyChatBtnClick(View view) {
+        mActivity.startActivity(new Intent(mActivity, MyChatActivity.class));
     }
 
     @Override

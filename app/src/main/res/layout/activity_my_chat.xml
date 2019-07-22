@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_myChat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        style="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:elevation="0dp">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            app:collapsedTitleGravity="end"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="@color/design_default_color_primary">
+
+            <ImageView
+                android:id="@+id/backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/taeyeon_four"
+                app:layout_collapseMode="parallax" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin"
+                app:logo="@drawable/avatar4"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:subtitle="测试main"
+                app:title="@string/toolBarTitle"
+                app:titleTextColor="@color/color_white" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#888" />
+
+        <com.lzy.widget.AlphaIndicator
+            android:id="@+id/alphaIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal">
+
+            <com.lzy.widget.AlphaView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:av_tabIconNormal="@mipmap/home_normal"
+                app:av_tabIconSelected="@mipmap/home_selected"
+                app:av_tabText="微信"
+                app:av_tabTextSize="14sp"
+                app:av_textColorNormal="#999999"
+                app:av_textColorSelected="#46c01b" />
+
+            <com.lzy.widget.AlphaView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:av_tabIconNormal="@mipmap/category_normal"
+                app:av_tabIconSelected="@mipmap/category_selected"
+                app:av_tabText="通讯录"
+                app:av_tabTextSize="14sp"
+                app:av_textColorNormal="#999999"
+                app:av_textColorSelected="#46c01b" />
+
+            <com.lzy.widget.AlphaView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:av_tabIconNormal="@mipmap/service_normal"
+                app:av_tabIconSelected="@mipmap/service_selected"
+                app:av_tabText="发现"
+                app:av_tabTextSize="14sp"
+                app:av_textColorNormal="#999999"
+                app:av_textColorSelected="#46c01b" />
+
+            <com.lzy.widget.AlphaView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:av_tabIconNormal="@mipmap/mine_normal"
+                app:av_tabIconSelected="@mipmap/mine_selected"
+                app:av_tabText="我"
+                app:av_tabTextSize="14sp"
+                app:av_textColorNormal="#999999"
+                app:av_textColorSelected="#46c01b" />
+        </com.lzy.widget.AlphaIndicator>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -66,12 +66,14 @@ public class MultiTypeAdapter<T extends MultiTypeListItemViewModel> extends Recy
 
     @Override
     public int getItemViewType(int position) {
+        /**以 mData 根据 position 获得相应的 MessageViewModel，并从中取得对应的 mType **/
         return mData.get(position).mType;
     }
 
     @Override
     public MultiTypeAdapter.CustomViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         if (mLayoutMapping != null) {
+            /**根据 mType，从 mLayoutMapping 中取得相应的 layoutId**/
             int layoutId = mLayoutMapping.get(type);
             if (layoutId != 0) {
                 ViewDataBinding binding = DataBindingUtil.inflate(

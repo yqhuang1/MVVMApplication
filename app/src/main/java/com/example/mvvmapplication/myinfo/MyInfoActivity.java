@@ -17,9 +17,7 @@ public class MyInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
          myInfoBinding =  DataBindingUtil.setContentView(this, R.layout.activity_my_info);
-
         myInfoViewModel = new MyInfoViewModel(this);
-
         myInfoBinding.setMyInfoViewModel(myInfoViewModel);
 
         myInfoViewModel.loadMyInfo();

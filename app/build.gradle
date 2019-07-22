@@ -49,4 +49,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
 
     implementation 'eu.long1:spacetablayout:1.0.4'
+    implementation 'com.lzy.widget:view-core:0.1.5'
 }

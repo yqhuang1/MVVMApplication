@@ -21,11 +21,11 @@ public class ImageBindingAdapter {
 
     /**
      * 网络下载式
-     *  img:error="@{@drawable/avatar1}"
-     *  img:imgUrl="@{myInfoViewModel.imageUrl}"
-     *  img:placeholder="@{@color/color_place_holder}"
+     * img:error="@{@drawable/avatar1}"
+     * img:imgUrl="@{myInfoViewModel.imageUrl}"
+     * img:placeholder="@{@color/color_place_holder}"
      *
-     *     @BindingAdapter({"img:imgUrl", "img:placeholder", "img:error"})
+     * @BindingAdapter({"img:imgUrl", "img:placeholder", "img:error"})
      **/
     @BindingAdapter({"imgUrl", "placeholder", "error"})
     public static void loadImage(ImageView imageView, String url, Drawable holderDrawable,
@@ -44,12 +44,19 @@ public class ImageBindingAdapter {
 
     /**
      * 本地加载式
-     *  img:src="@{meViewModel.mHeadImgResId}
+     * img:src="@{meViewModel.mHeadImgResId}
      *
-     *     @BindingAdapter("img:src")
+     * @BindingAdapter("img:src")
      **/
     @BindingAdapter("src")
     public static void setSrc(ImageView imageView, int resId) {
         imageView.setImageResource(resId);
+
+//        头像图片圆角化
+//        GlideApp.with(imageView.getContext())
+//                .load(resId)
+//                .fitCenter()
+//                .transform(new GlideCircleTransform())
+//                .into(imageView);
     }
 }
