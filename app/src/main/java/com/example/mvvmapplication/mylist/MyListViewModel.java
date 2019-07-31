@@ -8,6 +8,12 @@ import com.example.mvvmapplication.base.BaseViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+
 public class MyListViewModel extends BaseViewModel<MyListActivity> {
 
     public ObservableField<List<MeViewModel>> mListViewModel = new ObservableField<>();
@@ -20,6 +26,29 @@ public class MyListViewModel extends BaseViewModel<MyListActivity> {
         List<MeViewModel> friends = new ArrayList<>();
         friends.addAll(requestData());
         mListViewModel.set(friends);
+
+        Observable.from(friends)
+                .filter(new Func1<MeViewModel, Boolean>() {
+                    @Override
+                    public Boolean call(MeViewModel meViewModel) {
+                        return meViewModel.mNickName.get().isEmpty();
+                    }
+                })
+                .map(new Func1<MeViewModel, String>() {
+                    @Override
+                    public String call(MeViewModel meViewModel) {
+                        return meViewModel.mLastMessage.get();
+                    }
+                })
+                .subscribeOn(Schedulers.io())//I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler
+                .observeOn(AndroidSchedulers.mainThread())//指定的操作将在 Android 主线程运行
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+
+                    }
+                });
+
     }
 
     private List<MeViewModel> requestData() {
