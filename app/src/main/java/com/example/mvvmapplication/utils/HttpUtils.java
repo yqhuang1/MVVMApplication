@@ -2,13 +2,12 @@ package com.example.mvvmapplication.utils;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.example.mvvmapplication.entity.BaseVideoEntity;
 import com.example.mvvmapplication.entity.HttpResponse;
 import com.example.mvvmapplication.entity.VideoInfo;
 import com.example.mvvmapplication.mylist.MeViewModel;
 import com.example.mvvmapplication.mylist.MyListActivity;
-import com.example.mvvmapplication.mylist.MyListViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -16,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -27,7 +25,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.Result;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -64,8 +61,8 @@ public class HttpUtils {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    Log.d("CALLUrl", call.request().url().toString());
-                    Log.d("GETBody", response.body().string());
+                    Log.e("CALLUrl", call.request().url().toString());
+                    Log.e("GETBody", response.body().string());
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -159,15 +156,16 @@ public class HttpUtils {
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
         Subscription subscription = apiService.requestList()
-                .map(new Func1<HttpResponse<List<VideoInfo>>, List<VideoInfo>>() {
+                .map(new Func1<HttpResponse<List<BaseVideoEntity>>, List<BaseVideoEntity>>() {
                     @Override
-                    public List<VideoInfo> call(HttpResponse<List<VideoInfo>> listHttpResponse) {
+                    public List<BaseVideoEntity> call(HttpResponse<List<BaseVideoEntity>> listHttpResponse) {
+                        Log.e("requestListCall", listHttpResponse.getContent().toString());
                         return listHttpResponse.getContent();
                     }
                 })
-                .compose(new Observable.Transformer<List<VideoInfo>, List<VideoInfo>>() {
+                .compose(new Observable.Transformer<List<BaseVideoEntity>, List<BaseVideoEntity>>() {
                     @Override
-                    public Observable<List<VideoInfo>> call(Observable<List<VideoInfo>> listObservable) {
+                    public Observable<List<BaseVideoEntity>> call(Observable<List<BaseVideoEntity>> listObservable) {
                         return listObservable.observeOn(Schedulers.io())
                                 .unsubscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread());
@@ -180,7 +178,7 @@ public class HttpUtils {
                     }
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<VideoInfo>>() {
+                .subscribe(new Subscriber<List<BaseVideoEntity>>() {
                     @Override
                     public void onCompleted() {
                         // finishLoadingView();
@@ -192,18 +190,23 @@ public class HttpUtils {
                     }
 
                     @Override
-                    public void onNext(List<VideoInfo> videoInfos) {
+                    public void onNext(List<BaseVideoEntity> videoInfos) {
                         if (videoInfos == null) {
                             return;
                         }
                         List<MeViewModel> meViewModelList = new ArrayList<>();
-                        for (VideoInfo bean : videoInfos) {
+                        for (BaseVideoEntity entity : videoInfos) {
                             MeViewModel meViewModel = new MeViewModel((MyListActivity) context);
-                            meViewModel.setData(bean.getId(), bean.getAuthor(), bean.getContent());
+                            meViewModel.setData(entity.getId(), entity.getName(), entity.getUrl());
                             meViewModelList.add(meViewModel);
                         }
                     }
                 });
+
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+
     }
 
 }

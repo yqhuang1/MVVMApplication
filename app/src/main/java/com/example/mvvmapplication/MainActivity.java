@@ -20,8 +20,9 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new VideoUtils().RXjavaSHow();
-        new HttpUtils().getRetrofit(this);
+//        new VideoUtils().RXjavaSHow();
+//        new HttpUtils().getRetrofit(this);
+//        new HttpUtils().requestList(this);
 
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = new MainViewModel(this);

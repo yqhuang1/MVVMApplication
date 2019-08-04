@@ -1,5 +1,6 @@
 package com.example.mvvmapplication.utils;
 
+import com.example.mvvmapplication.entity.BaseVideoEntity;
 import com.example.mvvmapplication.entity.HttpResponse;
 import com.example.mvvmapplication.entity.VideoInfo;
 
@@ -22,7 +23,7 @@ public interface ApiService {
     Call<ResponseBody> getPage(@Query("page") String page);
 
     @POST("blog")
-    Call<Result<VideoInfo>> createBlog(@Body VideoInfo blog);
+    Call<Result<VideoInfo>> createBlog(@Body VideoInfo info);
 
     //PDF文件Retrofit下载
     //OkHttp
@@ -36,6 +37,6 @@ public interface ApiService {
     @GET
     Observable<ResponseBody> rxJavaRetrofitDownloadFile(@Url String fileUrl);
 
-    @POST("testList.do")
-    Observable<HttpResponse<List<VideoInfo>>> requestList();
+    @POST("Match/getMatchList.html/?page=2")
+    Observable<HttpResponse<List<BaseVideoEntity>>> requestList();
 }
