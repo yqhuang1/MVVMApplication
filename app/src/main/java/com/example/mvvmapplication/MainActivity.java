@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.mvvmapplication.base.BaseActivity;
 import com.example.mvvmapplication.databinding.ActivityMainBinding;
+import com.example.mvvmapplication.utils.HttpUtils;
 import com.example.mvvmapplication.utils.VideoUtils;
 
 public class MainActivity extends BaseActivity {
@@ -19,7 +20,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new VideoUtils().RXjavaSHow();;
+        new VideoUtils().RXjavaSHow();
+        new HttpUtils().getRetrofit(this);
 
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = new MainViewModel(this);

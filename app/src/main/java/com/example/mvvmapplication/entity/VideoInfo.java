@@ -29,6 +29,16 @@ public class VideoInfo implements Serializable {
 
     private String videoPlayChannel;//播放平台（七牛/优酷)
 
+    private String content;
+    private String author;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     /**
      * * 手游视界 ****
@@ -271,9 +281,16 @@ public class VideoInfo implements Serializable {
     }
 
     public void setCommentCount(String commentCount) {
-        CommentCount = commentCount;
+        this.CommentCount = commentCount;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     @Override
     public int hashCode() {

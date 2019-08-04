@@ -40,8 +40,16 @@ public class MyListViewModel extends BaseViewModel<MyListActivity> {
                         return meViewModel.mLastMessage.get();
                     }
                 })
-                .subscribeOn(Schedulers.io())//I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler
-                .observeOn(AndroidSchedulers.mainThread())//指定的操作将在 Android 主线程运行
+                /**
+                 * subscribeOn(): 指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。或者叫做事件产生的线程。
+                 * I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler
+                 * **/
+                .subscribeOn(Schedulers.io())
+                /**
+                 * observeOn(): 指定 Subscriber 所运行在的线程，或者叫做事件消费的线程。
+                 * 指定的操作（UI更新，显示）将在 Android 主线程运行
+                 * **/
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
@@ -72,4 +80,5 @@ public class MyListViewModel extends BaseViewModel<MyListActivity> {
     public void clear() {
 
     }
+
 }
