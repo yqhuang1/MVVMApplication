@@ -5,11 +5,18 @@ import android.util.Log;
 
 import com.example.mvvmapplication.entity.BaseVideoEntity;
 import com.example.mvvmapplication.entity.HttpResponse;
+import com.example.mvvmapplication.entity.HttpVideoResponse;
 import com.example.mvvmapplication.entity.VideoInfo;
+import com.example.mvvmapplication.http.HttpRequestFunc;
+import com.example.mvvmapplication.http.RxTransformer;
 import com.example.mvvmapplication.mylist.MeViewModel;
 import com.example.mvvmapplication.mylist.MyListActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.Result;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
@@ -34,6 +42,10 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class HttpUtils {
+
+    //构造方法
+    public HttpUtils() {
+    }
 
     private static final String baseUrl = "http://apps.ifeimo.com/home/";
     private static final String mPDFDownloadUrl = "http://apps.ifeimo.com/home/";
@@ -152,7 +164,8 @@ public class HttpUtils {
     public void requestList(final Context context) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
         Subscription subscription = apiService.requestList()
@@ -197,7 +210,7 @@ public class HttpUtils {
                         List<MeViewModel> meViewModelList = new ArrayList<>();
                         for (BaseVideoEntity entity : videoInfos) {
                             MeViewModel meViewModel = new MeViewModel((MyListActivity) context);
-                            meViewModel.setData(entity.getId(), entity.getName(), entity.getUrl());
+                            meViewModel.setData(entity.mark, entity.getName(), entity.getUrl());
                             meViewModelList.add(meViewModel);
                         }
                     }
@@ -207,6 +220,142 @@ public class HttpUtils {
             subscription.unsubscribe();
         }
 
+    }
+
+    public void getVideoListCall(final Context context, String page) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+                .client(okHttpClient)
+                //设置数据解析器，使得来自接口的json结果会自动解析成定义好了的字段和类型都相符的json对象接受类
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        apiService.getVideoListCall(page)
+                .enqueue(new Callback<HttpVideoResponse<List<BaseVideoEntity>>>() {
+                    @Override
+                    public void onResponse(Call<HttpVideoResponse<List<BaseVideoEntity>>> call, Response<HttpVideoResponse<List<BaseVideoEntity>>> response) {
+                        System.out.println("=======call.request().url()======" + call.request().url().toString());
+                        System.out.println("=======response.body()======" + response.body().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<HttpVideoResponse<List<BaseVideoEntity>>> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+    public void getVideoListObservable1(final Context context, String page) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+        //addCallAdapterFactory影响的就是Call或者Observable，
+        // Call类型是默认支持的(内部由DefaultCallAdapterFactory支持)，
+        // 而如果要支持Observable，我们就需要自己添加 addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        //---------------------
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        apiService.getVideoListObservable(page)
+                .map(new Func1<HttpVideoResponse<List<BaseVideoEntity>>, List<BaseVideoEntity>>() {
+                    @Override
+                    public List<BaseVideoEntity> call(HttpVideoResponse<List<BaseVideoEntity>> listHttpVideoResponse) {
+                        System.out.println("======map1======" + listHttpVideoResponse.toString());
+                        if (listHttpVideoResponse.isResult()) {
+                            System.out.println("=======VideoResponseString1=======" + listHttpVideoResponse.getData().toString());
+                            return listHttpVideoResponse.getData();
+                        } else {
+                            System.out.println("=======VideoResponseMsg1=======" + listHttpVideoResponse.msg);
+                            throw new RuntimeException(listHttpVideoResponse.msg);
+                        }
+                    }
+                })
+                //Observable.Transformer 将 List<BaseVideoEntity> 转化为 Observable<List<BaseVideoEntity>>
+                //compose指定请求网络和结果回调的线程
+                .compose(new Observable.Transformer<List<BaseVideoEntity>, List<BaseVideoEntity>>() {
+                    @Override
+                    public Observable<List<BaseVideoEntity>> call(Observable<List<BaseVideoEntity>> listObservable) {
+                        return listObservable.subscribeOn(Schedulers.io())
+                                .unsubscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread());
+                    }
+                })
+                //preAction，在请求之前做一些前置操作
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("========preAction=======");
+                        // showLoadingView();
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<BaseVideoEntity>>() {
+                    @Override
+                    public void onCompleted() {
+                        // finishLoadingView();
+                        System.out.println("======onCompleted======");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        System.out.println("======onError======");
+                        System.out.println("======onError======" + e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(List<BaseVideoEntity> baseVideoEntities) {
+                        System.out.println("======onNext======");
+                    }
+                });
+    }
+
+    public void getVideoListObservable2(final Context context, String page) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+        //addCallAdapterFactory影响的就是Call或者Observable，
+        // Call类型是默认支持的(内部由DefaultCallAdapterFactory支持)，
+        // 而如果要支持Observable，我们就需要自己添加 addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        //---------------------
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        apiService.getVideoListObservable(page)
+                .map(new HttpRequestFunc<List<BaseVideoEntity>>())
+                //Observable.Transformer 将 List<BaseVideoEntity> 转化为 Observable<List<BaseVideoEntity>>
+                //compose指定请求网络和结果回调的线程
+                .compose(RxTransformer.<List<BaseVideoEntity>>applyIoTransformer())
+                //preAction，在请求之前做一些前置操作
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        // showLoadingView();
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<BaseVideoEntity>>() {
+                    @Override
+                    public void onCompleted() {
+                        // finishLoadingView();
+                        System.out.println("======onCompleted======");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        System.out.println("======onError======");
+                        System.out.println("======onError======" + e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(List<BaseVideoEntity> baseVideoEntities) {
+                        System.out.println("======onNext======");
+                    }
+                });
     }
 
 }

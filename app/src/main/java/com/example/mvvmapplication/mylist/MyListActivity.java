@@ -2,13 +2,7 @@ package com.example.mvvmapplication.mylist;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.example.mvvmapplication.BR;
 import com.example.mvvmapplication.R;
@@ -34,7 +28,6 @@ public class MyListActivity extends BaseActivity {
         myListBinding.myListRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         myListBinding.myListRecyclerView.addItemDecoration(new VerticalDecoration(this));
-
 
         meCommonAdapter = new CommonAdapter<>(R.layout.list_item_me, BR.meViewModel);
         myListBinding.myListRecyclerView.setAdapter(meCommonAdapter);

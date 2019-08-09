@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:img="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="oneViewModel"
+            type="com.example.mvvmapplication.myFans.OneViewModel" />
+    </data>
+
+    <!--
+    绑定方法     （variable）name::（ViewModel public）方法名
+    绑定属性     （variable）name.（ViewModel public）（单一数据int、String)属性名
+    -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{oneViewModel::onOneClick}"
+        android:paddingLeft="16dp"
+        android:paddingTop="12dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:id="@+id/head_img"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@color/color_place_holder"
+            img:error="@{@drawable/avatar1}"
+            img:imgUrl="@{oneViewModel.mHeadImgUrl}"
+            img:placeholder="@{@color/color_place_holder}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/head_img"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/head_img"
+            android:text="@{oneViewModel.mNickName}"
+            android:textColor="#475966"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/head_img"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/head_img"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{oneViewModel.mLastMessage}"
+            android:textColor="#8a9399"
+            android:textSize="14sp" />
+    </RelativeLayout>
+</layout>

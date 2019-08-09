@@ -23,6 +23,9 @@ public class MainActivity extends BaseActivity {
 //        new VideoUtils().RXjavaSHow();
 //        new HttpUtils().getRetrofit(this);
 //        new HttpUtils().requestList(this);
+//        new HttpUtils().getVideoListCall(this, "3");
+//        new HttpUtils().getVideoListObservable1(this, "3");
+//        new HttpUtils().getVideoListObservable2(this, "3");
 
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = new MainViewModel(this);

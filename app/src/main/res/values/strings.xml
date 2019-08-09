@@ -5,6 +5,7 @@
     <string name="myShowActivityChick">转入MyShowActivity</string>
     <string name="myListActivityChick">抵达MyListActivity</string>
     <string name="myChatActivityChick">抵达MyChatActivity</string>
+    <string name="myFansActivityChick">抵达MyFansActivity</string>
     <string name="toolBarTitle">Show Time</string>
     <string name="title_activity_my_list">MyListActivity</string>
 

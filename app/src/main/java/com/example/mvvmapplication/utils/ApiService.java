@@ -2,6 +2,7 @@ package com.example.mvvmapplication.utils;
 
 import com.example.mvvmapplication.entity.BaseVideoEntity;
 import com.example.mvvmapplication.entity.HttpResponse;
+import com.example.mvvmapplication.entity.HttpVideoResponse;
 import com.example.mvvmapplication.entity.VideoInfo;
 
 import java.util.List;
@@ -39,4 +40,11 @@ public interface ApiService {
 
     @POST("Match/getMatchList.html/?page=2")
     Observable<HttpResponse<List<BaseVideoEntity>>> requestList();
+
+    @GET("Match/getMatchList.html/")
+    Call<HttpVideoResponse<List<BaseVideoEntity>>> getVideoListCall(@Query("page") String page);
+
+    @GET("Match/getMatchList.html/")
+    Observable<HttpVideoResponse<List<BaseVideoEntity>>> getVideoListObservable(@Query("page") String page);
+
 }

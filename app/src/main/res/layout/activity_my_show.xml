@@ -14,7 +14,8 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/activity_myShow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
 
         <android.support.design.widget.AppBarLayout
@@ -22,19 +23,22 @@
             style="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
             android:layout_width="match_parent"
             android:layout_height="250dp"
+            android:fitsSystemWindows="true"
             app:elevation="0dp">
 
+            <!-- app:contentScrim="?attr/colorPrimary" 坍塌后显示Toolbar内容的背景色-->
+            <!-- app:statusBarScrim="@android:color/transparent" 设置状态栏的颜色-->
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0.5"
                 app:collapsedTitleGravity="end"
-                app:contentScrim="?attr/colorPrimary"
+                app:contentScrim="@android:color/transparent"
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:statusBarScrim="@color/design_default_color_primary">
+                app:statusBarScrim="@android:color/transparent">
 
                 <ImageView
                     android:id="@+id/backdrop"
@@ -44,6 +48,14 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/taeyeon_four"
                     app:layout_collapseMode="parallax" />
+
+                <!-- 在顶部增加一个渐变遮罩, 防止出现status bar 状态栏看不清 -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/status_gradient"
+                    android:fitsSystemWindows="true"
+                    app:layout_collapseMode="pin" />
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
