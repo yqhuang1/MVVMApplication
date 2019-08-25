@@ -1,6 +1,6 @@
 package com.example.mvvmapplication.mychat;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 import android.util.SparseIntArray;
 
 import com.example.mvvmapplication.R;

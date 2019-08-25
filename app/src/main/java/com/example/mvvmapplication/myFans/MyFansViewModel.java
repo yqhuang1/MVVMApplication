@@ -1,6 +1,6 @@
 package com.example.mvvmapplication.myFans;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 
 import com.example.mvvmapplication.base.BaseViewModel;
 import com.example.mvvmapplication.entity.BaseVideoEntity;

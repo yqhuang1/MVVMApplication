@@ -1,8 +1,8 @@
 package com.example.mvvmapplication.mychat;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.mvvmapplication.R;
 import com.example.mvvmapplication.adapter.FragmentAdapter;

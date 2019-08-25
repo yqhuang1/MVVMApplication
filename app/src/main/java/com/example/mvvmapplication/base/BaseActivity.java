@@ -1,6 +1,6 @@
 package com.example.mvvmapplication.base;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 /**

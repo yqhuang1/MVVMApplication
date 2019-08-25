@@ -28,6 +28,7 @@
         android:padding="50dp">
 
         <Button
+            android:id="@+id/myInfoBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -35,6 +36,7 @@
             android:text="@string/myInfoActivityChick" />
 
         <Button
+            android:id="@+id/myShowBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -42,6 +44,7 @@
             android:text="@string/myShowActivityChick" />
 
         <Button
+            android:id="@+id/myListBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -49,6 +52,7 @@
             android:text="@string/myListActivityChick" />
 
         <Button
+            android:id="@+id/myChatBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -56,6 +60,7 @@
             android:text="@string/myChatActivityChick" />
 
         <Button
+            android:id="@+id/myFansBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"

@@ -1,6 +1,6 @@
 package com.example.mvvmapplication.mylist;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 
 import com.example.mvvmapplication.R;
 import com.example.mvvmapplication.base.BaseViewModel;

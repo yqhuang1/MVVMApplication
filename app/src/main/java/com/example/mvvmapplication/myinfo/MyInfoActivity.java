@@ -1,6 +1,6 @@
 package com.example.mvvmapplication.myinfo;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import com.example.mvvmapplication.R;

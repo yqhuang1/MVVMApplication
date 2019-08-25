@@ -1,7 +1,7 @@
 package com.example.mvvmapplication.mylist;
 
-import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 import android.view.View;
 import android.widget.Toast;
 

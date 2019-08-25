@@ -1,7 +1,7 @@
 package com.example.mvvmapplication.myinfo;
 
-import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 
 import com.example.mvvmapplication.base.BaseViewModel;
 

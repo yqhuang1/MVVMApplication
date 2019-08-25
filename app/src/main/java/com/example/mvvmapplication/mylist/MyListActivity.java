@@ -1,8 +1,8 @@
 package com.example.mvvmapplication.mylist;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mvvmapplication.BR;
 import com.example.mvvmapplication.R;

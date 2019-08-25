@@ -1,6 +1,6 @@
 package com.example.mvvmapplication.myFans;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 import android.view.View;
 import android.widget.Toast;
 

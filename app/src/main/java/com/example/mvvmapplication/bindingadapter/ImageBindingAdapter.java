@@ -1,6 +1,6 @@
 package com.example.mvvmapplication.bindingadapter;
 
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.ImageView;

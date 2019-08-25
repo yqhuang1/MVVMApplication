@@ -1,9 +1,9 @@
 package com.example.mvvmapplication.myshow;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.mvvmapplication.R;
 import com.example.mvvmapplication.base.BaseActivity;
